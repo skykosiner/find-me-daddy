@@ -76,11 +76,11 @@ func (c *Clipboard) AddToHistory() {
 
 	newBytes, err := json.MarshalIndent(cilpboards, "", "    ")
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 
 	_, err = file.WriteAt(newBytes, 0)
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 }
