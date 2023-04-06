@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/yonikosiner/find-me-daddy/pkg/clipboard"
+	"github.com/skykosiner/find-me-daddy/pkg/clipboard"
 )
 
 func main() {

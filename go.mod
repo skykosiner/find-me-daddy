@@ -1,4 +1,4 @@
-module github.com/yonikosiner/find-me-daddy
+module github.com/skykosiner/find-me-daddy
 
 go 1.18
 
