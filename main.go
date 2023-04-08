@@ -7,7 +7,7 @@ import (
 	"os/exec"
 
 	"github.com/skykosiner/find-me-daddy/pkg/clip"
-	"golang.design/x/clipboard"
+	"github.com/skykosiner/find-me-daddy/pkg/utils"
 )
 
 func main() {
@@ -24,7 +24,9 @@ func main() {
 		}
 	case "--get-fuzzy":
 		items := c.GetItems()
+		clipCommand := utils.GetClipCommand()
 		searcher := os.Getenv("FIND_ME_DADDY_FUZZY")
+		fmt.Println(searcher)
 
 		// If the user has not sellected anything just use dmenu (this only
 		// works on Linux, as Mac L, and windows even bigger L)
@@ -32,24 +34,14 @@ func main() {
 			searcher = "dmenu"
 		}
 
-		fmt.Println("seacher", searcher)
-
 		// TODO: WHY WON"T THIS WORK???????
-		cmd := fmt.Sprintf("echo '%s' | sed 's/\\[//' | sed 's/\\]//' | sed 's/^$//' | %s ", items, searcher)
+		cmd := fmt.Sprintf("echo '%s' | sed 's/\\[//' | sed 's/\\]//' | sed 's/^$//' | %s | %s", items, searcher, clipCommand)
 		output := exec.Command("bash", "-c", cmd)
 
-		stdOut, err := output.Output()
+		_, err := output.Output()
 
 		if err != nil {
-			log.Fatal("Error with finding the daddy ", err)
+			log.Fatal("Erro with finding the daddy", err)
 		}
-
-		err = clipboard.Init()
-		if err != nil {
-			log.Fatal("Error with clipboard ", err)
-		}
-
-		fmt.Println(string(stdOut))
-		clipboard.Write(clipboard.FmtText, []byte("test"))
 	}
 }

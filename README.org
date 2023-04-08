@@ -1,0 +1,10 @@
+#+title: README
+
+* TODO [0%]
+- [ ] If there is a item copied that contians any special chars such as `\n \t
+  \r` and so on remove them as it doesn't play well when getting the time back
+  out with programs like dmenu or fzf
+- [ ] Allow clipboard script to pass in `-f -d -r` for fzf, dmenu, or rofi
+  - Use the $2 for which picker and $1 for the option
+  - Also maybe set a defualt as a ENV varible and if there is no option
+    sellected then use dmenu
