@@ -1,10 +1,55 @@
 #+title: README
+- This only works on linux right now
+- Macos support comming soon
+- Windows support never, as fuck you windows users
 
-* TODO [50%]
+* What is this?
+This is just a simple golang cli that you can use fuzzy finders with to get your clipboard history.
+Only issue is right now I'm not sure how to have this listening in the
+background for cilpboard changes and add it, and I also don't want to take up to
+much cpu or ram. So right now you have to muanllly add items.
+* Install
+#+begin_src bash
+git clone https://github.com/skykosiner/find-me-daddy
+cd find-me-daddy
+chmod +x ./build
+./build
+#+end_src
+* Usage
+** Adding items
+#+begin_src bash
+find-me-daddy -add
+#+end_src
+This will add whatever is on your clipboard to the clipboard.json file, that can
+be found `~/.local/share/clipboard.json`
+** Searching items with a fuzzy finder
+By defualt if you call `find-me-daddy -get-fuzzy` it will just use dmenu. But
+sometimes you might want rofi, or fzf. You can eaither pass in options such as
+#+begin_src bash
+# Dmenu
+find-me-daddy -get-fuzzy -d
+
+# Rofi
+find-me-daddy -get-fuzzy -r
+
+# Fzf
+find-me-daddy -get-fuzzy -f
+#+end_src
+
+or if you want to use rofi every time you can set the envoriment varible
+FIND_ME_DADDY_FUZZY to rofi command that needs to brun such as `rofi -dmenu`.
+And you could really put any command that taken in std in and returns std out
+after you select an item.
+** Return list of items to std out
+Sometimes you just want to return a list of items to std out to manpulate the list and do things with item
+#+begin_src bash
+find-me-daddy -get-list
+#+end_src
+* TODO [100%]
 - [X] If there is a item copied that contians any special chars such as `\n \t
   \r` and so on remove them as it doesn't play well when getting the time back
   out with programs like dmenu or fzf
-- [ ] Allow clipboard script to pass in `-f -d -r` for fzf, dmenu, or rofi
+- [X] Allow clipboard script to pass in `-f -d -r` for fzf, dmenu, or rofi
   - Use the $2 for which picker and $1 for the option
   - Also maybe set a defualt as a ENV varible and if there is no option
     sellected then use dmenu
