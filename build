@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# Only create the clipboard.json file if the user has never built this before
+if ! command -v find-me-daddy &> /dev/null
+then
+    touch ~/.local/share/clipboard.json
+    echo "[\n]" >> ~/.local/share/clipboard.json
+fi
+
+go build -o find-me-daddy ./cmd/main.go && mv ./find-me-daddy ~/.local/bin/
