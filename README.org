@@ -33,15 +33,7 @@ find-me-daddy -get-fuzzy -d
 find-me-daddy -get-fuzzy -r
 
 # Fzf
-find-me-daddy -get-fuzzy -f
-#+end_src
-
-or if you want to use rofi every time you can set the envoriment varible
-FIND_ME_DADDY_FUZZY to rofi command that needs to brun such as `rofi -dmenu`.
-And you could really put any command that taken in std in and returns std out
-after you select an item.
-** Return list of items to std out
-Sometimes you just want to return a list of items to std out to manpulate the list and do things with item
+find-me-daddy -get-fuzzy -fSometimes you just want to return a list of items to std out to manpulate the list and do things with item
 #+begin_src bash
 find-me-daddy -get-list
 #+end_src

@@ -17,6 +17,12 @@ func main() {
 	args := os.Args[1:]
 
 	switch args[0] {
+	case "-help", "-h":
+		fmt.Println(`Usage
+Adding Items
+find-me-daddy -add
+This will add your current cilpboard item to a file under the path
+/.local/share/clipbeard.json`)
 	case "-add":
 		c.AddToHistory()
 	case "-get-list":
@@ -40,11 +46,7 @@ func main() {
 			case "-r":
 				searcher = "rofi -dmenu"
 			default:
-				searcher := os.Getenv("FIND_ME_DADDY_FUZZY")
-
-				if searcher == "" {
-					searcher = "dmenu"
-				}
+				fmt.Println(fmt.Sprintf("Sorry %s is not an option, defualting to using dmenu", args[1]))
 			}
 		}
 

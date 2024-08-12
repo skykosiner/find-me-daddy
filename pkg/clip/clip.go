@@ -6,8 +6,9 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
-	"os/exec"
 	"strings"
+
+	"github.com/atotto/clipboard"
 )
 
 type Clipboard struct {
@@ -15,17 +16,15 @@ type Clipboard struct {
 }
 
 func (c *Clipboard) GetCurrentClip() Clipboard {
-	cmd := "xclip -o -selection clipboard"
-	currentClip := exec.Command("bash", "-c", cmd)
-	stdOut, err := currentClip.Output()
+	clip, err := clipboard.ReadAll()
 
 	if err != nil {
-		log.Fatal("There was an error getting the clipboard", err)
+		log.Fatal("There was an error getting the clipboard ", err)
 	}
 
 	replacer := strings.NewReplacer("\t", "", "\n", "")
 
-	return Clipboard{replacer.Replace(string(stdOut))}
+	return Clipboard{replacer.Replace(string(clip))}
 }
 
 func (c *Clipboard) GetHistory() []Clipboard {
